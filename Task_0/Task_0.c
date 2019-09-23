@@ -13,13 +13,15 @@ int main()
 
 		//angle = 0.7;
 
-		float opp;
-		opp=hypot*sin(angle);
+		float opp[30];
+		int i;
 
-		for(angle=0; angle<M_PI/2; angle+=M_PI/20)
+
+		for(i=0; i<30; i++)
 		{
-			opp=hypot*sin(angle);
-			printf("\nOpposite side= %f cm",opp);
+			angle = (M_PI/2)*(i/30.0);
+			opp[i]=hypot*sin(angle);
+			printf("\nOpposite side= %f cm",opp[i]);
 		}
 
 
