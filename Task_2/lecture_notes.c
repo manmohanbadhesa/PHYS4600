@@ -100,6 +100,7 @@ int main()
 
 
 
+
 /*int main()
 {
 	int array[]= {12,14,16,18};
