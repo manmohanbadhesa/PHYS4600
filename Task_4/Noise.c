@@ -2,7 +2,7 @@
 #include <stdio.h>	 
 #include <math.h>	
 #include <time.h>
-
+#include <float.h>
 /*float noise()
 {
 	srand(time(NULL));
@@ -45,42 +45,47 @@ int main()
 
 	float x[100];
 	float y[100];
+	
 
 	int length;
 
 	length= sizeof(y)/sizeof(y[0]);
 
 	int i=0;
-
+	float maximum, minimum;
+	maximum= -FLT_MAX;
+	minimum= FLT_MAX;
 
 	for(i=0;i<100;i++)
 	{
 		x[i]=2*(M_PI)*i/100.0;
 		y[i]=sin(x[i]);
+		
+		if(maximum < y[i])
+			{
+				maximum=y[i];
+			}
+		if(minimum > y[i])
+			{
+				minimum=y[i];
+			}
+			
+
 		//printf("\n %f %f",x[i],y[i]);
 		//fprintf(task4_input,"\n %f %f",x[i],y[i]);
+		
 	}
 
 	fclose(task4_input);
 
+		float amplitude;
 
-	float max,min;
+		amplitude = (maximum-minimum)/2;
 
-	max= y[0];
-	min= y[0];
 
-	int n=1;
-
-	for(n=1; n<length; i++)
-		{
-			if(max < y[n])
-			{
-				max=y[n];
-			}
-		}
-
-		printf("\n%f",max);
-		return max;
+		
+		printf("\n maximum is %f \n minimum is %f \n amplitude is %f",maximum, minimum, amplitude);
+		//return maximum;
 
 		//printf("\n %f",max);
 		
