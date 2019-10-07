@@ -3,30 +3,7 @@
 #include <math.h>	
 #include <time.h>
 #include <float.h>
-/*float noise()
-{
-	srand(time(NULL));
 
-	float a,b,c;
-
-	a=(float)rand()/(float)RAND-MAX;
-	b=(float)rand()/(float)RAND-MAX;
-
-	c-(float)a-(float)b;
-
-
-
-
-
-
-
-
-
-}
-
-
-
-*/
 
 
 
@@ -45,21 +22,59 @@ int main()
 
 	float x[100];
 	float y[100];
+	float noise[10];
 	
 
-	int length;
+	int length, Lnoise;
 
+	Lnoise= sizeof(noise)/sizeof(noise[0]);
 	length= sizeof(y)/sizeof(y[0]);
+
+	
+
+
+	srand(time(NULL));
+
+	float a,b,c;
+
+
+	//c=a-b;
+	
+	//printf("\n a is %f \n b is  %f  \n c is %f ",a,b,c);
+
+	int n=0; 
+	for(n=0;n<Lnoise;n++)
+		{
+			srand(time(NULL));
+
+			a[n]=(float)rand()/(float)RAND_MAX;
+			b[n]=(float)rand()/(float)RAND_MAX;
+
+			noise[n]=((float)a-(float)b)/100;
+
+			printf("\n %f",noise[n]);
+		}
+	
+
+
+	
+	
+
+	/*
 
 	int i=0;
 	float maximum, minimum;
+	
+
 	maximum= -FLT_MAX;
 	minimum= FLT_MAX;
 
 	for(i=0;i<100;i++)
 	{
+		
+
 		x[i]=2*(M_PI)*i/100.0;
-		y[i]=sin(x[i]);
+		y[i]=(sin(x[i]))+noise[i];
 		
 		if(maximum < y[i])
 			{
@@ -71,7 +86,7 @@ int main()
 			}
 			
 
-		//printf("\n %f %f",x[i],y[i]);
+		printf("\n %f %f",x[i],y[i]);
 		//fprintf(task4_input,"\n %f %f",x[i],y[i]);
 		
 	}
@@ -90,7 +105,7 @@ int main()
 		//printf("\n %f",max);
 		
  	
-
+*/
 	
 }
 
