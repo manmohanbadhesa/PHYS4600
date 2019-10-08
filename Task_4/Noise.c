@@ -20,9 +20,16 @@ int main()
  		return 0;
  	}
 
+
+ 	//Creating the noise elements
+
+
 	float x[100];
 	float y[100];
-	float noise[10];
+	float noise[100];
+	float z[100];
+
+	float smooth_sin[100];
 	
 
 	int length, Lnoise;
@@ -35,47 +42,47 @@ int main()
 
 	srand(time(NULL));
 
-	float a,b,c;
-
-
-	//c=a-b;
+	float a,b;
 	
-	//printf("\n a is %f \n b is  %f  \n c is %f ",a,b,c);
-
-	int n=0; 
-	for(n=0;n<Lnoise;n++)
-		{
-			srand(time(NULL));
-
-			a[n]=(float)rand()/(float)RAND_MAX;
-			b[n]=(float)rand()/(float)RAND_MAX;
-
-			noise[n]=((float)a-(float)b)/100;
-
-			printf("\n %f",noise[n]);
-		}
-	
-
-
-	
-	
-
-	/*
 
 	int i=0;
+	int j=0;
 	float maximum, minimum;
 	
 
 	maximum= -FLT_MAX;
 	minimum= FLT_MAX;
 
+	//the sin function with the noise added
+
 	for(i=0;i<100;i++)
 	{
 		
+			a=(float)rand()/(float)RAND_MAX;
+			b=(float)rand()/(float)RAND_MAX;
+
+			noise[i]=((float)a-(float)b)/100;
 
 		x[i]=2*(M_PI)*i/100.0;
 		y[i]=(sin(x[i]))+noise[i];
+
 		
+		
+		
+		//smoothing filter
+
+				j=0;
+				for(j=0;j<5;j++)
+				{
+					z[i] += y[j];
+					
+				}	
+	 			smooth_sin[i]= z[i]/5;
+	 			printf("\n %f  %f",y[i],smooth_sin[i]);
+		
+
+		//finding the maximum and minimum to obtain the amplitude
+
 		if(maximum < y[i])
 			{
 				maximum=y[i];
@@ -84,9 +91,10 @@ int main()
 			{
 				minimum=y[i];
 			}
-			
 
-		printf("\n %f %f",x[i],y[i]);
+		
+
+		//printf("\n %f %f",x[i],y[i]);
 		//fprintf(task4_input,"\n %f %f",x[i],y[i]);
 		
 	}
@@ -94,19 +102,13 @@ int main()
 	fclose(task4_input);
 
 		float amplitude;
-
 		amplitude = (maximum-minimum)/2;
-
 
 		
 		printf("\n maximum is %f \n minimum is %f \n amplitude is %f",maximum, minimum, amplitude);
-		//return maximum;
-
-		//printf("\n %f",max);
 		
- 	
-*/
-	
+
+				
 }
 
 
