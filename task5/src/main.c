@@ -42,7 +42,7 @@ void main(int argc, char** argv)
 				viWrite(scopeHandle,"CURV?\n",6,&resultCount);
 				viRead(scopeHandle,dataBuffer,250,&resultCount);
 
-				for(int i = 0; i<128; i++)
+				for(int i = 0; i<20; i++)
 				{
 					y = dataBuffer[i];
 					printf("\nRaw = %x,  Read = %d",y,y);
@@ -62,4 +62,26 @@ void main(int argc, char** argv)
 	{
 		printf("\nFailed to open defaultRM");
 	}
+
+	//getting the current setting of the volts per division on the oscope
+
+	char ret[10];
+	viWrite (scopeHandle,"CH1:SCA?\n",9,&resultCount);
+	viRead(scopeHandle,ret,10,&resultCount );
+
+
+
+	printf("\n Currently the volts per division is  %s", ret);
+	
+	float volts_bits;
+	sscanf(ret,"%f", &volts_bits);
+	printf("\n  volts per bits is %f", volts_bits);
+
+	for(int n=0;n<20;n++)
+	{
+		
+	}
+	
+
+	
 }

@@ -46,7 +46,7 @@ int main()
 	
 
 	int i=0;
-	int j=0;
+	
 	float maximum, minimum;
 	
 
@@ -67,18 +67,7 @@ int main()
 		y[i]=(sin(x[i]))+noise[i];
 
 		
-		
-		
-		//smoothing filter
-
-				j=0;
-				for(j=0;j<5;j++)
-				{
-					z[i] += y[j];
-					
-				}	
-	 			smooth_sin[i]= z[i]/5;
-	 			printf("\n %f  %f",y[i],smooth_sin[i]);
+			
 		
 
 		//finding the maximum and minimum to obtain the amplitude
@@ -94,9 +83,29 @@ int main()
 
 		
 
-		//printf("\n %f %f",x[i],y[i]);
+		printf("\n %f",y[i]);
 		//fprintf(task4_input,"\n %f %f",x[i],y[i]);
 		
+	}
+
+	
+	// smoothing filter
+
+
+
+	for(int n=0; n<100; n++)
+	{
+
+
+				
+				for(int j=n;j<(n+5);j++)
+				{
+					z[n] += y[j];
+					
+				}	
+	 			smooth_sin[i]= z[n]/5;
+	 			printf("\n \n \n %f",smooth_sin[i]);
+
 	}
 
 	fclose(task4_input);
