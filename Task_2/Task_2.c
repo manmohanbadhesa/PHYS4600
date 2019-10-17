@@ -24,8 +24,12 @@ int main()
 	printf("\nMean = %d", length);
 
 	
-	return 0;  // Functions which return a value MUST contain at least one return statement
+	return 0;  
 }
+
+
+
+//Seperate function to calculate mean with data and length inputs
 
 float mean_function(float* data, int length)
 {
@@ -40,6 +44,11 @@ float mean_function(float* data, int length)
 	return sum/length;
 }
 
+
+
+
+
+// seperate function to calculate std with data and length input
 
 float std_dev(float* data, int length)
 {

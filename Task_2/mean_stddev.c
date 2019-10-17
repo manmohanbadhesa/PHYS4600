@@ -25,5 +25,5 @@ int main()
 	printf("\nMean = %d", length);
 
 	
-	return 0;  // Functions which return a value MUST contain at least one return statement
+	return 0;  
 }
