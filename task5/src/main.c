@@ -3,6 +3,30 @@
 #include <math.h>	
 #include <visa.h>
 
+// sprintf gives first variable a string in the middle the value after the comma
+
+
+ViStatus set_voltage(ViSession handle, float volts)
+				{
+
+					char command[36] ;
+					sprintf(command,"CH1:SCALE %E\n", volts);
+					ViStatus status = viWrite(handle, command, strlen(command), &resultCount);
+					return status;
+				}
+
+
+
+ViStatus get_curve(ViSession handle, char* dataBuffer, int npoints )
+				{
+					viWrite(scopeHandle,"CURV?\n",6,&resultCount);
+					viRead(scopeHandle,dataBuffer,npoints,&resultCount);
+					status= viRead(handle, dataBuffer, npoints);
+					return status;
+				}
+
+
+
 void main(int argc, char** argv)
 {
 	unsigned char resultBuffer[256];
