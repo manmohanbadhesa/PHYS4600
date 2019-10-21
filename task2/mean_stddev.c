@@ -1,5 +1,5 @@
 
-
+#include "task2b.h"
 
 #include <stdlib.h>	
 #include <stdio.h>	 
@@ -8,6 +8,8 @@
 float mean_function(float* , int);
 float std_dev(float* data, int length);
 
+
+/* function to calculate stddev and mean together*/
 
 int main()
 {
@@ -19,6 +21,9 @@ int main()
 
 	mean = mean_function(data,length);
 	stddev= std_dev(data, length);
+
+
+	// Prints mean and stddev of the data set provided 
 
 	printf("\nMean = %f", mean);
 	printf("\nStandard deviation = %f", stddev);
