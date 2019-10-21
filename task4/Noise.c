@@ -110,11 +110,14 @@ int main()
 
 }
 	
-
+/*
+	JAMES: This is good as far as it goes. But it would be more useful if your function had the option
+	to actually enter the length of the data and your window for smoothing to the function.
+*/
 
 
 	// smoothing filter
-float smoothing_filter(float* data)
+float smoothing_filter(float* data)  /*TRY: (float* data, int data_length, int window_length) */
 {	
 	
 	float m;
