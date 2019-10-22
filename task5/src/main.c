@@ -4,7 +4,7 @@
 #include <visa.h>
 
 // sprintf gives first variable a string in the middle the value after the comma
-
+/*
 
 ViStatus set_voltage(ViSession handle, float volts)
 				{
@@ -25,7 +25,7 @@ ViStatus get_curve(ViSession handle, char* dataBuffer, int npoints )
 					return status;
 				}
 
-
+*/
 
 void main(int argc, char** argv)
 {
@@ -63,10 +63,13 @@ void main(int argc, char** argv)
 				printf("\nResult count = %d",resultCount);
 				printf("\nResult buffer = %s\n",resultBuffer );
 
-				viWrite(scopeHandle,"CURV?\n",6,&resultCount);
-				viRead(scopeHandle,dataBuffer,250,&resultCount);
+				viWrite(scopeHandle,"DAT:SOU CH1\n",12,&resultCount);
 
-				for(int i = 0; i<20; i++)
+				
+				viWrite(scopeHandle,"CURV?\n",6,&resultCount);
+				viRead(scopeHandle,dataBuffer,2500,&resultCount);
+
+				for(int i = 0; i<200; i++)
 				{
 					y = dataBuffer[i];
 					printf("\nRaw = %x,  Read = %d",y,y);
@@ -94,8 +97,9 @@ void main(int argc, char** argv)
 	viRead(scopeHandle,ret,10,&resultCount );
 
 
+	//printf("\n \n Currently the volts per division is  %s", ret);
 
-	printf("\n Currently the volts per division is  %s", ret);
+
 	
 	float volts_bits;
 	sscanf(ret,"%f", &volts_bits);
@@ -109,3 +113,20 @@ void main(int argc, char** argv)
 
 	
 }
+
+
+/*
+
+ViSession scopeHandle;
+ViSession FGHandle;
+
+
+
+viFindRsrc(defaultRM, "USB[0-9]::0x0699?*INSTR",........, description);
+viOpen(defaultRM, description, ....., &scopeHandle);
+
+viFindRsrc(defaultRM, "USB[0-9]::0x1AB1?*INSTR",........, description);
+viOpen(defaultRM, description, ....., &FGHandle);
+
+
+*/

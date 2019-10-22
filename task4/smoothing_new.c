@@ -89,8 +89,8 @@ int main()
 	}
 
 	
+	
 	// smoothing filter
-
 
 
 	for(int n=0; n<100; n++)

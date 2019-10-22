@@ -5,7 +5,7 @@
 #include <float.h>
 
 
-float smoothing_filter(float* data);
+float smoothing_filter(float* rawdata, float* smoothdata, int Length, int window);
 
 
 int main()
@@ -28,7 +28,13 @@ int main()
 
 	float x[100];
 	float y[100];
+	float smooth;
 	float noise[100];
+	
+	int window;
+
+	window =5;
+	float smooth_sin[100];
 
 	
 
@@ -83,17 +89,18 @@ int main()
 			}
 
 		
-		float smoothed_values[100];
-		
-		smoothed_values[i] = smoothing_filter(y);
-		printf("\n  %f",smoothed_values[i]);
-		//printf("\n %f",y[i]);
-		//fprintf(task4_input,"\n %f %f",x[i],y[i]);
-		
+	
 	}
 	
 
+	smooth= smoothing_filter(y,smooth_sin,length, window);
 
+
+	for(int k=0; k<(length-(window-1));k++)
+	{		
+		printf("\n %f    %f", smooth_sin[k], y[k]);
+	}
+	
 
 	//fclose(task4_input);
 
@@ -116,29 +123,30 @@ int main()
 */
 
 
+
+
 	// smoothing filter
-float smoothing_filter(float* data)  /*TRY: (float* data, int data_length, int window_length) */
+float smoothing_filter(float* rawdata, float* smoothdata, int Length, int window)  /*TRY: (float* data, int data_length, int window_length) */
 {	
 	
 	float m;
 	int n=0;
-	float z[100];
+	float z[Length];
 
-	float smooth_sin[100];
 
-	for(n=0; n<100; n++)
+	for(n=0; n<(Length-(window-1)); n++)
 	{
-			
-				for(int j=n;j<(n+5);j++)
+				m=0;
+				for(int j=n;j<(n+window);j++)
 				{
-					m += data[j];
+					m += rawdata[j];
 				}	
 				z[n]=m ;
-	 			smooth_sin[n]= z[n]/5;
+	 			smoothdata[n]= z[n]/window;
 	 			//printf("\n %f      %f",z[n],smooth_sin[n]);
 
 	}
-	return smooth_sin[n];
+	
 }
 
 
@@ -153,6 +161,22 @@ float smoothing_filter(float* data)  /*TRY: (float* data, int data_length, int w
 
 
 
+
+
+
+/*
+
+	
+		float smoothed_values[100];
+		
+		smoothed_values[i] = smoothing_filter(y);
+		printf("\n  %f",smoothed_values[i]);
+		//printf("\n %f",y[i]);
+		//fprintf(task4_input,"\n %f %f",x[i],y[i]);
+
+
+
+*/
 
 
 
