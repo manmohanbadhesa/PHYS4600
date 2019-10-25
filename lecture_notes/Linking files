@@ -1,0 +1,11 @@
+Linking files
+
+compile only the .c files 
+
+first : gcc -c file1.c -o file1.o
+second: gcc -c file2.c -o file2.o
+
+last : gcc file1.o file2.o -o file12
+
+
+notice no . required after final output file name

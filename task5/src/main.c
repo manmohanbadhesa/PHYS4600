@@ -27,6 +27,8 @@ ViStatus get_curve(ViSession handle, char* dataBuffer, int npoints )
 
 */
 
+float smoothing_filter(float* rawdata, float* smoothdata, int Length, int window);
+
 void main(int argc, char** argv)
 {
 	unsigned char resultBuffer[256];
@@ -39,7 +41,10 @@ void main(int argc, char** argv)
 	ViChar description[VI_FIND_BUFLEN];
 	char dataBuffer[2500];
 
-	int y;
+	int y[2500];
+
+	float smoothed[2500];
+
 
 	int lsb;
 	int msb;
@@ -69,10 +74,12 @@ void main(int argc, char** argv)
 				viWrite(scopeHandle,"CURV?\n",6,&resultCount);
 				viRead(scopeHandle,dataBuffer,2500,&resultCount);
 
-				for(int i = 0; i<200; i++)
+							
+				for(int i = 0; i<2500; i++)
 				{
-					y = dataBuffer[i];
-					printf("\nRaw = %x,  Read = %d",y,y);
+					y[i] = dataBuffer[i];
+					//printf("\nRaw = %x,  Read = %d",y[i],y[i]);
+
 				}
 			}
 			else
@@ -90,6 +97,10 @@ void main(int argc, char** argv)
 		printf("\nFailed to open defaultRM");
 	}
 
+	
+
+
+
 	//getting the current setting of the volts per division on the oscope
 
 	char ret[10];
@@ -100,16 +111,28 @@ void main(int argc, char** argv)
 	//printf("\n \n Currently the volts per division is  %s", ret);
 
 
-	
-	float volts_bits;
-	sscanf(ret,"%f", &volts_bits);
+				
+	float volts_div, volts_bits;
+	sscanf(ret,"%f", &volts_div);
+	volts_bits= volts_div/(256/10);
 	printf("\n  volts per bits is %f", volts_bits);
-
-	for(int n=0;n<20;n++)
-	{
-		
-	}
 	
+	float z[2500];
+
+	for(int n=0;n<2500;n++)
+	{
+		z[n]= y[n]*volts_bits;
+		//printf("\n volatage is =%f",z[n]);
+	}
+
+	smoothing_filter(z,smoothed,2500,10);
+
+
+
+		for(int k=0; k<(2500-(10-1));k++)
+			{		
+				printf("\n %f    %f", smoothed[k], z[k]);
+			}
 
 	
 }

@@ -4,6 +4,8 @@
 #include <time.h>
 #include <float.h>
 
+#include "smoothing_filter.h"
+
 
 float smoothing_filter(float* rawdata, float* smoothdata, int Length, int window);
 
@@ -14,7 +16,7 @@ int main()
 	FILE* task4_input;
 	task4_input =fopen("task4_data","w");
 
-	// this it to check if the fill is opened or not
+	// this is to check if the fill is opened or not
 
 
 	if(task4_input == NULL) 
@@ -123,10 +125,10 @@ int main()
 */
 
 
-
+/*
 
 	// smoothing filter
-float smoothing_filter(float* rawdata, float* smoothdata, int Length, int window)  /*TRY: (float* data, int data_length, int window_length) */
+float smoothing_filter(float* rawdata, float* smoothdata, int Length, int window)  /*TRY: (float* data, int data_length, int window_length) 
 {	
 	
 	float m;
@@ -149,7 +151,7 @@ float smoothing_filter(float* rawdata, float* smoothdata, int Length, int window
 	
 }
 
-
+*/
 
 
 
