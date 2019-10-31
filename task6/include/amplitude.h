@@ -1,0 +1,1 @@
+float amplitude(float* data, int length);

@@ -138,15 +138,8 @@ void main(int argc, char** argv)
 		//printf("\n volatage is =%f",z[n]);
 	}
 
-	
-
-
-	// smooth the data using the filter from task4
-
 	smoothing_filter(z,smoothed,2500,10);
 
-
-	// printing the smooth data
 
 /*
 		for(int k=0; k<(2500-(10-1));k++)
@@ -155,10 +148,6 @@ void main(int argc, char** argv)
 			}
 
 */			
-
-
-	// getting the amplitude of the smoothed data
-
 	float amplitude_smoothed;
 	amplitude_smoothed= amplitude(smoothed,2500);
 
