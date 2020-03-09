@@ -121,6 +121,12 @@ void main(int argc, char** argv)
 	viRead(scopeHandle,ret,10,&resultCount );
 
 
+	// getting the main time base
+
+	char time[10];
+	viWrite (scopeHandle,"HORizontal:MAIn?\n",17,&resultCount);
+	viRead(scopeHandle,time,10,&resultCount );
+
 	//printf("\n \n Currently the volts per division is  %s", ret);
 
 
@@ -128,8 +134,8 @@ void main(int argc, char** argv)
 	float volts_div, volts_bits;
 	sscanf(ret,"%f", &volts_div);
 	volts_bits= volts_div/(256/10);
-	printf("\n  volts per bits is %f", volts_bits);
-	
+	printf("\n  volts per bits is %f %f", volts_bits, volts_div);
+	printf("\n time division is %f", time);
 	float z[2500];
 
 	for(int n=0;n<2500;n++)

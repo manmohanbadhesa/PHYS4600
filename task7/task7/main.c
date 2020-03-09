@@ -6,25 +6,69 @@
  */ 
 
 #include <avr/io.h>
+#include <util/delay.h>
+#include <avr/interrupt.h>
 
-void loop(){}
+//LED on and off at the comparion value for time
 
+uint8_t keep_going = 1;
 
-int main(void)
+//manual way of setting up interrupts
+
+ISR(TIMER0_OVF_vect) 
+
 {
-    /* Replace with your application code */
-    
-    
-		TCNT0 =0;
-		TCCR0B = (1<< CS00) | (1<<CS02);
-		
-	while (1)
-	{
-		while((TIFR0 & 1) == 0) ;
-		PORTD ^= (1<< PD1);
-		
-    }
+
+	PORTD^= (1 << PD1);
+
 }
+
+
+
+ISR(TIMER0_COMPA_vect)
+
+{
+
+	PORTD^= (1 << PD1);
+
+}
+
+
+
+
+void setup()
+
+{
+
+	DDRB |= (1<<PD3); // Set as output pin
+	
+	//	TCCR0A= |= (1<<COM0A0) | (1<<COM0A1);
+	PORTD &= ~(1<<PD3);  // Start pin as 0
+
+	TCCR0B = 0x01; // Chooses normal mode with no clock prescaling
+	TIMSK0 = 1;  // Enables timer 0 overflow interrupt
+
+	OCR0A = 200; //Number that compares at that time
+
+	sei();
+
+}
+
+
+int main()
+{
+	setup();
+	while(1) loop();
+}
+
+
+
+
+
+
+
+
+
 
 
 
